@@ -1,13 +1,16 @@
 from selene import browser, have, be
 import time
 import random
+
 browser.config.timeout = 50
 browser.config.base_url = "https://app.qa.guru/automation-practice-form/"
 
 Name = ("Anna", "Maya", "Olga", "Criss",
         "Nina", "Masha", "Katya")
 Surname = ("Bulgakova", "Dobraya", "Popova")
-Address = ("44 Thomas Ridges North Dalestad PO35 5XS","51 Adam Loop Laurenfurt RG19 8JZ","298 Hunt Green Harryfurt LE3 0BF")
+Address = (
+"44 Thomas Ridges North Dalestad PO35 5XS", "51 Adam Loop Laurenfurt RG19 8JZ", "298 Hunt Green Harryfurt LE3 0BF")
+
 
 def test_fill_form():
     browser.open('/')
@@ -23,17 +26,13 @@ def test_fill_form():
     browser.element('[type="checkbox"][value="Sports"]').click()
     time.sleep(10)
     browser.element('[data-testid="subjects"]').element('..').click()
-    browser.all('#menu- [role=option]').element_by(have.attribute('data-value').value('Accounting')).click().press_escape()
+    browser.all('#menu- [role=option]').element_by(
+        have.attribute('data-value').value('Accounting')).click().press_escape()
     browser.element('[data-testid="stateCity"]').element('..').click()
     time.sleep(3)
-    browser.all('#menu- [role=option]').element_by(have.attribute('data-value').value('Illinois')).click().press_escape()
+    browser.all('#menu- [role=option]').element_by(
+        have.attribute('data-value').value('Illinois')).click().press_escape()
     browser.element('[data-testid="address"]').type((random.choice(Address)))
     time.sleep(3)
     browser.element('[type="submit"]').click()
     assert browser.element('[class="MuiTypography-root MuiTypography-h4 css-rq8zac"]').should(be.visible)
-
-
-
-
-
-
